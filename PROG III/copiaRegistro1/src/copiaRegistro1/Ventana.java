@@ -1,3 +1,4 @@
+package copiaRegistro1;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -6,7 +7,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
-//
+
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultComboBoxModel;
@@ -23,7 +24,6 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
-//
 
 public class Ventana extends JFrame{
 	
