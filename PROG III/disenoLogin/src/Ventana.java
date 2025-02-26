@@ -50,10 +50,18 @@ public class Ventana extends JFrame{
 	public JPanel login() {// aqui le agregamos un panel a nuestra ventana, y login es una funcion 
 		
 		Font fuente=new Font("Nunito",Font.BOLD,16);
+		
+		JPanel loginCont=new JPanel();
+		loginCont.setLayout(null);
+		loginCont.setBounds(40,80,380,500);
+		loginCont.setOpaque(true);
+		loginCont.setVisible(true);
+		loginCont.repaint();
+		
 	
 		
 		JPanel mipanel = new JPanel (); // ESTE BLOQUE MODIFICA LO RELACIONADO CON EL PANEL DE LOGIN
-		mipanel.setBackground(Color.decode("0xDDDEBC"));
+		mipanel.setBackground(Color.decode("0x415C95"));
 		mipanel.setOpaque(true);// si queremos ponerle un color, usamos esta funcion para habilitar el background 
 		mipanel.setSize(1000,700);// comom panel es un objeto, tiene algunas caractetisticas como la ventana 
 		mipanel.setLocation(0,0);
@@ -71,6 +79,7 @@ public class Ventana extends JFrame{
 		//etiqueta1.setHorizontalAlignment(JLabel.CENTER);
 		//etiqueta1.setFont(new Font("Nunito",Font.BOLD,16));
 		etiqueta1.setFont(fuente);
+		etiqueta1.setForeground(Color.BLACK);
 		mipanel.add(etiqueta1);
 		
 		
@@ -81,7 +90,7 @@ public class Ventana extends JFrame{
 		
 		
 		JLabel logo=new JLabel();
-		logo.setBounds(500,115,300,300);
+		logo.setBounds(540,180,300,300);
 		logo.setVisible(true);
 		logo.setIcon(iconScaled2);
 		
@@ -97,6 +106,7 @@ public class Ventana extends JFrame{
 		//etiqueta2.setHorizontalAlignment(JLabel.CENTER);
 		//etiqueta2.setFont(new Font("Nunito",Font.BOLD,14));
 		etiqueta2.setFont(fuente);
+		etiqueta2.setForeground(Color.BLACK);
 		mipanel.add(etiqueta2);
 		
 		
@@ -161,6 +171,7 @@ public class Ventana extends JFrame{
 		//etiqueta2.setHorizontalAlignment(JLabel.CENTER);
 		//etiqueta2.setFont(new Font("Nunito",Font.BOLD,14));
 		etiqueta3.setFont(fuente);
+		etiqueta3.setForeground(Color.BLACK);
 		mipanel.add(etiqueta3);
 		
 		
@@ -220,6 +231,7 @@ public class Ventana extends JFrame{
 		miCheck.setOpaque(false);
 		miCheck.setText("Recordar mis credenciales");
 		miCheck.setVisible(true);
+		miCheck.setForeground(Color.BLACK);
 		miCheck.setBackground(Color.decode("0xDDDEBC"));
 		miCheck.setFont(new Font("Nunito",Font.PLAIN,12));
 		miCheck.setBounds(37,323,200,30);
@@ -230,20 +242,34 @@ public class Ventana extends JFrame{
 		recordar2.setSize(300,40);
 		//etiqueta1.setOpaque(true);
 		//etiqueta1.setBackground(Color.BLACK);
-		recordar2.setLocation(215,280);
+		recordar2.setLocation(215,282);
+		recordar2.setForeground(Color.BLACK);
 		//etiqueta2.setHorizontalAlignment(JLabel.CENTER);
-		recordar2.setFont(new Font("Nunito",Font.BOLD,9));
+		recordar2.setFont(new Font("Nunito",Font.BOLD,10));
 		mipanel.add(recordar2);
 		
 		
 		JButton boton=new JButton("Iniciar sesión");
 		boton.setBackground(Color.decode("0x93CEEA"));
 		boton.setSize(200,40);
-		boton.setLocation(40,380);
+		boton.setLocation(40,400);
         boton.setLayout(null);
+        boton.setForeground(Color.BLACK);
         boton.setVisible(true);
         boton.setFont(fuente);
         mipanel.add(boton);
+        
+        loginCont.add(etiqueta1);
+        loginCont.add(recordar2);
+        loginCont.add(miCheck);
+        loginCont.add(passCont);
+        loginCont.add(etiqueta3);
+        loginCont.add(userCont);
+        loginCont.add(etiqueta2);
+        loginCont.add(boton);
+        
+        mipanel.add(loginCont);
+        
 		return mipanel;// aqui retornamos un panel que se va a mostrar en la ventana
 		
 		
