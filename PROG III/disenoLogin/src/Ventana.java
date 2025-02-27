@@ -13,9 +13,13 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -43,8 +47,60 @@ public class Ventana extends JFrame{
 		this.add(this.login());//add permite agregar todo lo que queremos dentrod e la ventana, entonces estamos pidiendo agregar el objeto login a Ventana
 		//this.add(this.registro());//add permite agregar todo lo que queremos dentrod e la ventana, entonces estamos pidiendo agregar el objeto login a Ventana
 		//this.add(this.users());//add permite agregar todo lo que queremos dentrod e la ventana, entonces estamos pidiendo agregar el objeto login a Ventana
-		this.revalidate();
+		
+		
+		JMenuBar barra = new JMenuBar();
+		
+		JMenu archivo=new JMenu("Archivo");
+		barra.add(archivo);
+		
+		JMenuItem abrir=new JMenuItem("Abrir nuevo");
+		archivo.add(abrir);
+		
+		JMenuItem opc=new JMenuItem("Exportar");
+		archivo.add(opc);
+		
+		JMenuItem opc1=new JMenuItem("Guardar como");
+		archivo.add(opc1);
+		
+		JMenu enviar=new JMenu("Enviar vía");
+		archivo.add(enviar);
+		
+		JMenuItem enviar1=new JMenuItem("Correo electrónico");
+		enviar.add(enviar1);
+		
+		JMenuItem enviar2=new JMenuItem("Fax");
+		enviar.add(enviar2);
+		
+		JMenu ventana=new JMenu("Ventana");
+		barra.add(ventana);		
+		
+		JMenuItem herramientas=new JMenuItem("Herramientas");
+		ventana.add(herramientas);
+		
+		JMenu preferencias=new JMenu("Preferencias");
+		ventana.add(preferencias);
+		
+		JMenuItem interfaz=new JMenuItem("Tema oscuro");
+		preferencias.add(interfaz);
+		
+		JMenuItem interfaz1=new JMenuItem("Tema claro");
+		preferencias.add(interfaz1);
+		
+		JCheckBoxMenuItem opc2=new JCheckBoxMenuItem();
+		opc2.setOpaque(false);
+		interfaz.add(opc2);
+	
+		
+		
+		
+		
+		this.setJMenuBar(barra);
+		
+		
 		this.repaint();
+		this.revalidate();
+	
 	}
 	
 	public JPanel login() {// aqui le agregamos un panel a nuestra ventana, y login es una funcion 
@@ -53,7 +109,8 @@ public class Ventana extends JFrame{
 		
 		JPanel loginCont=new JPanel();
 		loginCont.setLayout(null);
-		loginCont.setBounds(40,80,380,500);
+		loginCont.setBackground(Color.decode("0xDDDBC0"));
+		loginCont.setBounds(40,80,380,490);
 		loginCont.setOpaque(true);
 		loginCont.setVisible(true);
 		loginCont.repaint();
@@ -282,6 +339,9 @@ public class Ventana extends JFrame{
 		ButtonGroup grupo;
 		JComboBox<String> combo,combo1,combo2;
 		JRadioButton a,b;
+		
+		
+		
 		
 		
 		
