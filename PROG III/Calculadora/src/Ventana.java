@@ -39,7 +39,7 @@ public class Ventana extends JFrame {
 			Border borde=BorderFactory.createLineBorder(Color.black, 1);
 			Font fuente=new Font("Nunito",Font.BOLD,16);
 			GridBagConstraints gbc=new GridBagConstraints();//OBJETO QUE ME AYUDA A AJUSTAR LA POSICION DE LA CELDA Y EL TAMANO DE LA CELDA
-			
+			//
 			JPanel panel=new JPanel();
 			panel.setLayout(new GridBagLayout());
 			/* utilizo gridbaglayout para que los componentes
