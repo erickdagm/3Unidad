@@ -4,8 +4,10 @@ import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -25,6 +27,12 @@ public class Ventana extends JFrame {
 		this.setMaximumSize(new Dimension (800,400));
 		this.setMinimumSize(new Dimension(400,400));
 		
+		ImageIcon icon2 = new ImageIcon("C:\\Users\\erick\\OneDrive\\Escritorio\\Sprites\\pinguino.png");//instancio un objeto de tipo imageicon, y especificamaos la ruta para cargar el archivo
+		Image img2=icon2.getImage();//obtenemos la imagen
+		Image imgScaled2=img2.getScaledInstance(15, 15, Image.SCALE_SMOOTH);//escalamos la imagen
+		ImageIcon iconScaled2=new ImageIcon(imgScaled2);//creamos un ImageIcon con la imagen escalada, se hizo de esta forma porque no se puede modificar el tamano de la imagen dentro del JLAbel directamente
+		
+		this.setIconImage(imgScaled2);
 		
 		this.repaint();
 		this.revalidate();
@@ -37,7 +45,7 @@ public class Ventana extends JFrame {
 			
 			//creacion de borde para todos los componentes
 			Border borde=BorderFactory.createLineBorder(Color.black, 1);
-			Font fuente=new Font("Nunito",Font.BOLD,16);
+			Font fuente=new Font("Nunito",Font.BOLD,24);
 			GridBagConstraints gbc=new GridBagConstraints();//OBJETO QUE ME AYUDA A AJUSTAR LA POSICION DE LA CELDA Y EL TAMANO DE LA CELDA
 			//
 			JPanel panel=new JPanel();
@@ -218,4 +226,29 @@ public class Ventana extends JFrame {
 			return panel;
 			
 		}
+		
+//		public JPanel calculadora1(){
+//			
+//			JPanel panel2=new JPanel();
+//			
+//			
+//			
+//			
+//			
+//			return panel2;
+//			
+//		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 }
