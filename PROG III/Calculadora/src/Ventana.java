@@ -1,3 +1,4 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,6 +11,7 @@ import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.Border;
 
@@ -27,17 +29,18 @@ public class Ventana extends JFrame {
 		this.setMaximumSize(new Dimension (800,400));
 		this.setMinimumSize(new Dimension(400,400));
 		
-		ImageIcon icon2 = new ImageIcon("C:\\Users\\erick\\OneDrive\\Escritorio\\Sprites\\pinguino.png");//instancio un objeto de tipo imageicon, y especificamaos la ruta para cargar el archivo
-		Image img2=icon2.getImage();//obtenemos la imagen
-		Image imgScaled2=img2.getScaledInstance(15, 15, Image.SCALE_SMOOTH);//escalamos la imagen
-		ImageIcon iconScaled2=new ImageIcon(imgScaled2);//creamos un ImageIcon con la imagen escalada, se hizo de esta forma porque no se puede modificar el tamano de la imagen dentro del JLAbel directamente
 		
-		this.setIconImage(imgScaled2);
+		
 		
 		this.repaint();
 		this.revalidate();
 		
-		this.add(this.Calculadora());
+		this.add(this.calculadora1());
+		ImageIcon icon2 = new ImageIcon("C:\\Users\\erick\\OneDrive\\Escritorio\\Sprites\\pinguino.png");//instancio un objeto de tipo imageicon, y especificamaos la ruta para cargar el archivo
+		Image img2=icon2.getImage();//obtenemos la imagen
+		Image imgScaled2=img2.getScaledInstance(30, 30, Image.SCALE_SMOOTH);//escalamos la imagen
+		ImageIcon iconScaled2=new ImageIcon(imgScaled2);//creamos un ImageIcon con la imagen escalada, se hizo de esta forma porque no se puede modificar el tamano de la imagen dentro del JLAbel directamente
+		this.setIconImage(imgScaled2);
 	
 	}
 	
@@ -227,17 +230,61 @@ public class Ventana extends JFrame {
 			
 		}
 		
-//		public JPanel calculadora1(){
-//			
-//			JPanel panel2=new JPanel();
-//			
-//			
-//			
-//			
-//			
-//			return panel2;
-//			
-//		}
+		public JPanel calculadora1(){
+			
+			JPanel mipanel=new JPanel();
+			mipanel.setLayout(new BorderLayout());
+			mipanel.setOpaque(true);
+			mipanel.setBackground(Color.white);
+			
+			JLabel screen=new JLabel("20");
+			screen.setFont(new Font("Nunito",Font.BOLD,35));
+			screen.setOpaque(false);
+			screen.setHorizontalAlignment(JLabel.RIGHT);
+			mipanel.add(screen,BorderLayout.NORTH);
+			
+			JPanel botonera=new JPanel();
+			botonera.setLayout(new BorderLayout());
+			botonera.setOpaque(false);
+			botonera.setBackground(Color.white);
+			mipanel.add(botonera,BorderLayout.CENTER);
+			
+			JPanel numeros=new JPanel();
+			numeros.setLayout(new GridLayout(4,3));
+			numeros.setOpaque(false);
+			numeros.setBackground(Color.white);
+			botonera.add(numeros,BorderLayout.CENTER);
+			
+			JPanel operaciones=new JPanel();
+			operaciones.setLayout(new GridLayout(6,1));
+			operaciones.setOpaque(false);
+			operaciones.setBackground(Color.magenta);
+			botonera.add(operaciones,BorderLayout.LINE_END);
+			
+			
+			String [] botones= {"1","2","3","4","5","6","7","8","9","0","."};
+			
+			for(String num:botones) {
+				JButton n=new JButton(num);
+				numeros.add(n);
+				}
+			
+			String [] aritmeticos= {"+","-","/","*","=","CE"};
+			
+			for(String arit:aritmeticos) {
+				JButton a=new JButton(arit);
+				operaciones.add(a);
+			}
+			
+			
+				
+			
+			
+			
+			
+			return mipanel;
+			
+		}
 		
 		
 		
