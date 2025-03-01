@@ -13,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.border.Border;
 
 public class Ventana extends JFrame {
@@ -35,7 +36,8 @@ public class Ventana extends JFrame {
 		this.repaint();
 		this.revalidate();
 		
-		this.add(this.calculadora1());
+		this.add(this.interes());
+		//this.add(this.calculadora1());
 		ImageIcon icon2 = new ImageIcon("C:\\Users\\erick\\OneDrive\\Escritorio\\Sprites\\pinguino.png");//instancio un objeto de tipo imageicon, y especificamaos la ruta para cargar el archivo
 		Image img2=icon2.getImage();//obtenemos la imagen
 		Image imgScaled2=img2.getScaledInstance(30, 30, Image.SCALE_SMOOTH);//escalamos la imagen
@@ -286,7 +288,59 @@ public class Ventana extends JFrame {
 			
 		}
 		
+		public JPanel interes() {
+			
+			
+			JPanel mipanel=new JPanel();
+			mipanel.setLayout(new BorderLayout());
+			mipanel.setOpaque(true);
+			mipanel.setBackground(Color.red);
+			
+			JLabel interes=new JLabel("Interés");
+			interes.setFont(new Font("Nunito",Font.BOLD,35));
+			interes.setOpaque(true);
+			interes.setBackground(Color.white);
+			interes.setHorizontalAlignment(JLabel.LEFT);
+			mipanel.add(interes,BorderLayout.NORTH);
+			
+			JPanel calculo=new JPanel();
+			calculo.setLayout(new BorderLayout());
+			calculo.setOpaque(true);
+			calculo.setBackground(Color.yellow);
+			mipanel.add(calculo,BorderLayout.CENTER);
+			
+			JPanel results=new JPanel();
+			results.setLayout(new GridLayout(2,2));
+			results.setOpaque(true);
+			results.setBackground(Color.magenta);
+			calculo.add(results,BorderLayout.SOUTH);
+			
+			
+			JLabel texto=new JLabel("Interés:");
+			texto.setBorder(BorderFactory.createMatteBorder(0, 80, 0, 0, Color.magenta));
+			results.add(texto,BorderLayout.WEST);
+			
+			JLabel texto1=new JLabel("Monto:");
+			texto1.setBorder(BorderFactory.createMatteBorder(0, 80, 0, 0, Color.magenta));
+			results.add(texto1,BorderLayout.WEST);
+			
+//			JTextField text1=new JTextField("99.1019");
+//			results.add(text1,BorderLayout.EAST);
+//			
+//			JTextField text2=new JTextField("102.3776");
+//			results.add(text2,BorderLayout.EAST);
+			
+			JLabel texto2=new JLabel();
+			texto2.setBorder(BorderFactory.createMatteBorder(0, 80, 0, 0, Color.yellow));
+			calculo.add(texto2);
+			
+			
+			
+			
 		
+			
+			return mipanel;
+		}
 		
 		
 		
