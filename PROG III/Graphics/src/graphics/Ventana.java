@@ -81,6 +81,8 @@ public class Ventana extends JFrame {
 			
 			g2d.setStroke(new BasicStroke(2));
 			g2d.setColor(Color.blue);
+			
+			
 			g2d.drawOval(80,80 , 120, 80);
 			int [] xs= {470,270,70};
 			int []ys= {450,250,50};
