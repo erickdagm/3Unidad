@@ -51,7 +51,7 @@ public class Ventana extends JFrame{
 		this.add(this.login());//add permite agregar todo lo que queremos dentrod e la ventana, entonces estamos pidiendo agregar el objeto login a Ventana
 		//this.add(this.registro());//add permite agregar todo lo que queremos dentrod e la ventana, entonces estamos pidiendo agregar el objeto login a Ventana
 		//this.add(this.users());//add permite agregar todo lo que queremos dentrod e la ventana, entonces estamos pidiendo agregar el objeto login a Ventana
-		
+		//
 		
 		JMenuBar barra = new JMenuBar();
 		
