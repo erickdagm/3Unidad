@@ -6,6 +6,9 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 //
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
@@ -20,6 +23,7 @@ import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -170,7 +174,7 @@ public class Ventana extends JFrame{
 		
 		JPanel userCont=new JPanel ();
 		userCont.setLayout(null);
-		Border borde=BorderFactory.createLineBorder(Color.red,2);
+		Border borde=BorderFactory.createLineBorder(Color.black,2);
 		userCont.setBorder(borde);
 		userCont.setLocation(40,150);
 		
@@ -315,6 +319,45 @@ public class Ventana extends JFrame{
         boton.setVisible(true);
         boton.setFont(fuente);
         mipanel.add(boton);
+        
+        boton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Boolean flag1=false,flag2=false;
+				// TODO Auto-generated method stub
+				if(email.getText().equals("")) {
+					email.setBorder(BorderFactory.createLineBorder(Color.red,5));
+				}
+				else {
+					email.setBorder(BorderFactory.createLineBorder(Color.green,5));
+					flag1=true;
+				}
+				
+				String passw=new String(contrasena.getPassword());
+				if(passw.equals("")) {
+					contrasena.setBorder(BorderFactory.createLineBorder(Color.red,5));
+
+				}
+				else
+				{
+					contrasena.setBorder(BorderFactory.createLineBorder(Color.green,5));
+					flag2=true;
+				}
+				
+				if(flag1&&flag2) {
+					if(email.getText().equals("erickdagm")) 
+						if(password.equals("contrasena1")){
+							JOptionPane.showMessageDialog(null, "Bienvenido",".",JOptionPane.WARNING_MESSAGE);
+							
+						}else {
+							JOptionPane.showMessageDialog(null, "Verifique los datos de inicio de sesion",".",JOptionPane.ERROR_MESSAGE);
+
+						}
+					
+				}
+			}
+		});
         
         loginCont.add(etiqueta1);
         loginCont.add(recordar2);
@@ -564,16 +607,43 @@ public class Ventana extends JFrame{
 		privacy.setFont(new Font("Nunito",Font.PLAIN,14));
 		mipanel.add(privacy);
 		
-		JButton boton=new JButton("REGÍSTRATE");
-		boton.setBackground(Color.decode("0x83AD9A"));
-		boton.setSize(200,40);
-		boton.setLocation(300,570);
-        boton.setLayout(null);
-        boton.setVisible(true);
-        mipanel.add(boton);
-		return mipanel;// aqui retornamos un panel que se va a mostrar en la ventana
 		
+		JButton boton4=new JButton("REGÍSTRATE");
+		boton4.setBackground(Color.decode("0x83AD9A"));
+		boton4.setSize(200,40);
+		boton4.setLocation(300,570);
+		boton4.setLayout(null);
+		boton4.setVisible(true);
+        mipanel.add(boton4);
+		
+		
+		
+		boton4.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+							if(name.getText().equals("") ||last_second_name.getText().equals("")||last_name.getText().equals("") ||user.getText().equals("")||bio.getText().equals("")||about_me.getText().equals("")){
+								name.setBorder(BorderFactory.createLineBorder(Color.red,5));
+								last_second_name.setBorder(BorderFactory.createLineBorder(Color.red,5));
+								last_name.setBorder(BorderFactory.createLineBorder(Color.red,5));
+								user.setBorder(BorderFactory.createLineBorder(Color.red,5));
+								bio.setBorder(BorderFactory.createLineBorder(Color.red,5));
+								about_me.setBorder(BorderFactory.createLineBorder(Color.red,5));
+
+							}
+							else {
+								name.setBorder(BorderFactory.createLineBorder(Color.green,5));
+								last_second_name.setBorder(BorderFactory.createLineBorder(Color.green,5));
+								last_name.setBorder(BorderFactory.createLineBorder(Color.green,5));
+								user.setBorder(BorderFactory.createLineBorder(Color.green,5));
+								//bio.setBorder(BorderFactory.createLineBorder(Color.green,5));
+								about_me.setBorder(BorderFactory.createLineBorder(Color.green,5));
+							}
+								
+			}
+		});
 		//
+		return mipanel;// aqui retornamos un panel que se va a mostrar en la ventana
 	}
 
 	public JPanel users()
