@@ -95,6 +95,7 @@ public class Ventana extends JFrame{
 		opc2.setOpaque(false);
 		interfaz.add(opc2);
 	
+	
 		
 		
 		
@@ -105,6 +106,19 @@ public class Ventana extends JFrame{
 		this.repaint();
 		this.revalidate();
 	
+	}
+	
+	public void router(String route) {
+		this.getContentPane().removeAll();
+		if(route.equals("Registro")) {
+			this.add(this.registro());
+			
+		}
+		if(route.equals("Login")) {
+			this.add(this.login());
+		}
+		this.repaint();
+		this.revalidate();
 	}
 	
 	public JPanel login() {// aqui le agregamos un panel a nuestra ventana, y login es una funcion 
@@ -370,12 +384,48 @@ public class Ventana extends JFrame{
         
         mipanel.add(loginCont);
         
+        
+
+        
+        
+        JButton ir_registro=new JButton("Ir a registro");
+        ir_registro.setBackground(Color.decode("0x93CEEA"));
+        ir_registro.setSize(200,40);
+        ir_registro.setLocation(700,500);
+        ir_registro.setLayout(null);
+        ir_registro.setForeground(Color.BLACK);
+        ir_registro.setVisible(true);
+        ir_registro.setFont(fuente);
+        mipanel.add(ir_registro);
+        
+        ir_registro.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Registro");
+				
+			}
+
+		});
+        
+        
+        
+        
+        
+        
+        
 		return mipanel;// aqui retornamos un panel que se va a mostrar en la ventana
 		
 		
 	}
 	
 	public JPanel registro() {// aqui le agregamos un panel a nuestra ventana, y login es una funcion 
+		
+		
+			
+			
+		
+		
 		
 		Font fuente=new Font("Nunito",Font.BOLD,16);
 		JPanel mipanel = new JPanel ();
@@ -641,6 +691,26 @@ public class Ventana extends JFrame{
 							}
 								
 			}
+		});
+		
+		JButton ir_login=new JButton("Ir a registro");
+		ir_login.setBackground(Color.decode("0x93CEEA"));
+		ir_login.setSize(200,40);
+		ir_login.setLocation(700,500);
+		ir_login.setLayout(null);
+		ir_login.setForeground(Color.BLACK);
+		ir_login.setVisible(true);
+		ir_login.setFont(fuente);
+        mipanel.add(ir_login);
+        
+        ir_login.addActionListener( new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Login");
+				
+			}
+
 		});
 		//
 		return mipanel;// aqui retornamos un panel que se va a mostrar en la ventana
