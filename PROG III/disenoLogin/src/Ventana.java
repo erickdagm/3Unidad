@@ -94,6 +94,30 @@ public class Ventana extends JFrame{
 		JCheckBoxMenuItem opc2=new JCheckBoxMenuItem();
 		opc2.setOpaque(false);
 		interfaz.add(opc2);
+		
+		JMenu Cuenta=new JMenu("Cuenta");
+		barra.add(Cuenta);
+		
+		JMenuItem login= new JMenuItem("Ir a login");
+		login.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Login");
+				
+			}
+		});
+		Cuenta.add(login);		
+		
+		JMenuItem registro= new JMenuItem("Ir a registro");
+		registro.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Registro");				
+			}
+		});
+		Cuenta.add(registro);		
 	
 	
 		
