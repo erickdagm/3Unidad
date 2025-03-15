@@ -83,6 +83,7 @@ public class Ventana extends JFrame {
 			}
 		});
 		Cuenta.add(registro);
+		//
 
 		JMenuItem recuperar = new JMenuItem("Recuperar contraseña");
 		recuperar.addActionListener(new ActionListener() {
