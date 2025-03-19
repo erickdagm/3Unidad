@@ -5,6 +5,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,6 +30,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
 //
@@ -50,7 +52,7 @@ public class Ventana extends JFrame {
 		this.setMaximumSize(new Dimension(800, 400));
 		this.setMinimumSize(new Dimension(400, 400));
 
-		this.add(this.recuperar());// add permite agregar todo lo que queremos dentrod e la ventana, entonces
+		this.add(this.login());// add permite agregar todo lo que queremos dentrod e la ventana, entonces
 									// estamos pidiendo agregar el objeto login a Ventana
 		// this.add(this.registro());//add permite agregar todo lo que queremos dentrod
 		// e la ventana, entonces estamos pidiendo agregar el objeto login a Ventana
@@ -128,8 +130,8 @@ public class Ventana extends JFrame {
 		});
 		Usuarios.add(users);
 
-		JMenu ayuda= new JMenu("Ayuda");
-		
+		JMenu ayuda = new JMenu("Ayuda");
+
 		JMenuItem createUser = new JMenuItem("¿Cómo crear un usuario?");
 		createUser.addActionListener(new ActionListener() {
 
@@ -139,7 +141,7 @@ public class Ventana extends JFrame {
 			}
 		});
 		ayuda.add(createUser);
-		
+
 		JMenuItem accessSystem = new JMenuItem("¿Cómo acceder al sistema?");
 		accessSystem.addActionListener(new ActionListener() {
 
@@ -149,7 +151,7 @@ public class Ventana extends JFrame {
 			}
 		});
 		ayuda.add(accessSystem);
-		
+
 		JMenuItem forgotPass = new JMenuItem("¿Qué pasa si olvidé mi contraseña?");
 		forgotPass.addActionListener(new ActionListener() {
 
@@ -159,9 +161,9 @@ public class Ventana extends JFrame {
 			}
 		});
 		ayuda.add(forgotPass);
-		
+
 		barra.add(ayuda);
-		
+
 		this.setJMenuBar(barra);
 
 		this.repaint();
@@ -182,27 +184,84 @@ public class Ventana extends JFrame {
 		if (route.equals("Recuperar contraseña")) {
 			this.add(this.recuperar());
 		}
-		if(route.equals("Alta de usuario")) {
+		if (route.equals("Alta de usuario")) {
 			this.add(this.alta());
 		}
-		if(route.equals("Baja de usuario")) {
+		if (route.equals("Baja de usuario")) {
 			this.add(this.baja());
 		}
-		if(route.equals("Consulta de usuario")) {
+		if (route.equals("Consulta de usuario")) {
 			this.add(this.users());
 		}
-		if(route.equals("¿Cómo crear un usuario?")) {
+		if (route.equals("¿Cómo crear un usuario?")) {
 			this.add(this.createUser());
 		}
-		if(route.equals("¿Qué pasa si olvidé mi contraseña?")) {
-			this.add(this.forgotPass());
+		if (route.equals("¿Qué pasa si olvidé mi contraseña?")) {
+			this.add(this.forgotPass1());
 		}
-		if(route.equals("¿Cómo acceder al sistema?")) {
+		if (route.equals("¿Cómo acceder al sistema?")) {
 			this.add(this.accessSystem());
 		}
 		
+
 		this.repaint();
 		this.revalidate();
+	}
+
+	public JPanel forgotPass1() {
+		JFrame frame = new JFrame();
+		frame.setBounds(100, 100, 800, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		
+		JButton btnNewButton = new JButton("Inicio");
+		btnNewButton.setBackground(new Color(255, 255, 128));
+		panel.add(btnNewButton);
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Login");
+			}
+		});
+		
+		JLabel lblNewLabel = new JLabel("Tutorial para recuperar contraseña");
+		panel.add(lblNewLabel);
+		
+		JPanel panel_1 = new JPanel();
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(new GridLayout(6, 0, 0, 0));
+		
+		JTextArea txtrPasoAbrir = new JTextArea();
+		txtrPasoAbrir.setText("Paso 1: Abrir el Programa\nInicia el programa desde el ícono en tu escritorio o desde el menú de inicio.");
+		panel_1.add(txtrPasoAbrir);
+		
+		JTextArea txtrPasoIr = new JTextArea();
+		txtrPasoIr.setText("Paso 2: Ir a la Pantalla de Inicio de Sesión\nEn la pantalla donde se ingresa el usuario y contraseña, busca el enlace que dice:\n👉 \"¿Olvidaste tu contraseña?\"");
+		panel_1.add(txtrPasoIr);
+		
+		JTextArea txtrPasoHacer = new JTextArea();
+		txtrPasoHacer.setText("Paso 3: Hacer Clic en \"¿Olvidaste tu Contraseña?\"\nHaz clic en el enlace para abrir la ventana de recuperación de contraseña.");
+		panel_1.add(txtrPasoHacer);
+		
+		JTextArea txtrPasoIngresar = new JTextArea();
+		txtrPasoIngresar.setText("Paso 4: Ingresar Información para Recuperar la Contraseña\nDependiendo del sistema, puede pedirte una de estas opciones:\n\nCorreo electrónico: Ingresa tu correo registrado para recibir un enlace de recuperación.\nPregunta de seguridad: Responde correctamente la pregunta configurada al momento de tu registro.");
+		panel_1.add(txtrPasoIngresar);
+		
+		JTextArea txtrPasoVerificar = new JTextArea();
+		txtrPasoVerificar.setText("Paso 5: Verificar y Restablecer la Contraseña\nSi elegiste correo electrónico, revisa tu bandeja de entrada y sigue el enlace para crear una nueva contraseña.\nSi usaste la pregunta de seguridad, el sistema te permitirá ingresar una nueva contraseña tras responder correctamente.");
+		panel_1.add(txtrPasoVerificar);
+		
+		JTextArea txtrPasoConfirmar = new JTextArea();
+		txtrPasoConfirmar.setText("Paso 6: Confirmar la Nueva Contraseña\nCrea una nueva contraseña segura y confírmala. Luego, haz clic en \"Guardar\" para finalizar el proceso.");
+		panel_1.add(txtrPasoConfirmar);
+		
+		return (JPanel) frame.getContentPane();
+		
 	}
 	
 	public JPanel createUser() {
@@ -215,15 +274,15 @@ public class Ventana extends JFrame {
 		mipanel.setLayout(null);
 		mipanel.revalidate();
 		mipanel.repaint();
-		
-		JLabel head1=new JLabel("¿Cómo crear un usuario?");
+
+		JLabel head1 = new JLabel("¿Cómo crear un usuario?");
 		head1.setOpaque(false);
-		head1.setBounds(400,100,200,40);
+		head1.setBounds(400, 100, 200, 40);
 		head1.setForeground(Color.white);
 		mipanel.add(head1);
 		return mipanel;
 	}
-	
+
 	public JPanel forgotPass() {
 		JPanel mipanel = new JPanel(); // ESTE BLOQUE MODIFICA LO RELACIONADO CON EL PANEL DE LOGIN
 		mipanel.setBackground(Color.decode("0x415C95"));
@@ -234,15 +293,15 @@ public class Ventana extends JFrame {
 		mipanel.setLayout(null);
 		mipanel.revalidate();
 		mipanel.repaint();
-		
-		JLabel head1=new JLabel("¿Olvidaste tu contraseña?");
+
+		JLabel head1 = new JLabel("¿Olvidaste tu contraseña?");
 		head1.setOpaque(false);
-		head1.setBounds(400,100,200,40);
+		head1.setBounds(400, 100, 200, 40);
 		head1.setForeground(Color.white);
 		mipanel.add(head1);
 		return mipanel;
 	}
-	
+
 	public JPanel accessSystem() {
 		JPanel mipanel = new JPanel(); // ESTE BLOQUE MODIFICA LO RELACIONADO CON EL PANEL DE LOGIN
 		mipanel.setBackground(Color.decode("0x415C95"));
@@ -253,53 +312,224 @@ public class Ventana extends JFrame {
 		mipanel.setLayout(null);
 		mipanel.revalidate();
 		mipanel.repaint();
-		
-		JLabel head1=new JLabel("¿Cómo acceder al sistema?");
+
+		JLabel head1 = new JLabel("¿Cómo acceder al sistema?");
 		head1.setOpaque(false);
-		head1.setBounds(400,100,200,40);
+		head1.setBounds(400, 100, 200, 40);
 		head1.setForeground(Color.white);
 		mipanel.add(head1);
 		return mipanel;
 	}
 
 	public JPanel alta() {
-		JPanel mipanel = new JPanel(); // ESTE BLOQUE MODIFICA LO RELACIONADO CON EL PANEL DE LOGIN
-		mipanel.setBackground(Color.decode("0x415C95"));
-		mipanel.setOpaque(true);// si queremos ponerle un color, usamos esta funcion para habilitar el
-								// background
-		mipanel.setSize(800, 600);// comom panel es un objeto, tiene algunas caractetisticas como la ventana
-		mipanel.setLocation(0, 0);
-		mipanel.setLayout(null);
-		mipanel.revalidate();
-		mipanel.repaint();
+		JFrame frame = new JFrame();
+		frame.getContentPane().setBackground(new Color(255, 255, 255));
+		frame.setBounds(100, 100, 800, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.getContentPane().setLayout(new BorderLayout(0, 0));
 		
-		JLabel head1=new JLabel("Alta de usuario");
-		head1.setOpaque(false);
-		head1.setBounds(400,100,200,40);
-		head1.setForeground(Color.white);
-		mipanel.add(head1);
-		return mipanel;
+		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		
+		JButton btnNewButton_1 = new JButton("Inicio");
+		btnNewButton_1.setBackground(new Color(255, 255, 128));
+		panel.add(btnNewButton_1);
+		
+		JTextField txtAltaDeUsuario = new JTextField();
+		txtAltaDeUsuario.setText("ALTA DE USUARIO");
+		txtAltaDeUsuario.setHorizontalAlignment(0);
+		txtAltaDeUsuario.setOpaque(false);	
+		txtAltaDeUsuario.setColumns(15);
+		panel.add(txtAltaDeUsuario);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
+		frame.getContentPane().add(panel_1, BorderLayout.WEST);
+		panel_1.setLayout(new BorderLayout(0, 0));
+		
+		JPanel panel_2 = new JPanel();
+		panel_2.setBackground(new Color(255, 255, 255));
+		panel_1.add(panel_2, BorderLayout.CENTER);
+		panel_2.setLayout(null);
+		
+		JCheckBox chckbxNewCheckBox = new JCheckBox("Mostrar foto de perfil");
+		chckbxNewCheckBox.setBackground(new Color(255, 255, 255));
+		chckbxNewCheckBox.setBounds(113, 7, 136, 23);
+		panel_2.add(chckbxNewCheckBox);
+		
+		JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Mostrar fecha de nacimiento");
+		chckbxNewCheckBox_1.setBackground(new Color(255, 255, 255));
+		chckbxNewCheckBox_1.setBounds(113, 33, 167, 23);
+		panel_2.add(chckbxNewCheckBox_1);
+		
+		JLabel lblNewLabel_2 = new JLabel("");
+		lblNewLabel_2.setBackground(new Color(255, 255, 255));
+		lblNewLabel_2.setIcon(new ImageIcon("C:\\Users\\erick\\OneDrive\\Escritorio\\Sprites\\Usuario2.png"));
+		panel_1.add(lblNewLabel_2, BorderLayout.NORTH);
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setForeground(Color.WHITE);
+		panel_3.setBackground(new Color(255, 255, 255));
+		frame.getContentPane().add(panel_3, BorderLayout.CENTER);
+		panel_3.setLayout(new GridLayout(8, 2, 10, 10));
+		
+		JLabel lblNewLabel_8 = new JLabel("Numero de empleado");
+		lblNewLabel_8.setOpaque(true);
+		lblNewLabel_8.setForeground(Color.BLACK);
+		lblNewLabel_8.setBackground(Color.WHITE);
+		panel_3.add(lblNewLabel_8);
+		
+		JTextField textField_3 = new JTextField();
+		textField_3.setText("20239802");
+		textField_3.setColumns(10);
+		panel_3.add(textField_3);
+		
+		JLabel lblNewLabel_1 = new JLabel("Nombre");
+		lblNewLabel_1.setOpaque(true);
+		lblNewLabel_1.setForeground(Color.BLACK);
+		lblNewLabel_1.setBackground(new Color(255, 255, 255));
+		panel_3.add(lblNewLabel_1);
+		
+		JTextField textField = new JTextField();
+		textField.setText("Erick");
+		textField.setColumns(10);
+		panel_3.add(textField);
+		
+		JLabel lblNewLabel_3 = new JLabel("Apellido paterno");
+		panel_3.add(lblNewLabel_3);
+		
+		JTextField textField_1 = new JTextField();
+		textField_1.setText("Gonzalez");
+		textField_1.setColumns(10);
+		panel_3.add(textField_1);
+		
+		JLabel lblNewLabel_4 = new JLabel("Apellido materno");
+		panel_3.add(lblNewLabel_4);
+		
+		JTextField textField_2 = new JTextField();
+		textField_2.setText("Martinez");
+		textField_2.setColumns(10);
+		panel_3.add(textField_2);
+		
+		JLabel lblNewLabel_5 = new JLabel("Fecha de nacimiento");
+		panel_3.add(lblNewLabel_5);
+		
+		JPanel panel_4 = new JPanel();
+		panel_4.setBackground(new Color(255, 255, 255));
+		panel_3.add(panel_4);
+		
+		JComboBox comboBox = new JComboBox();
+		panel_4.add(comboBox);
+		
+		JComboBox comboBox_1 = new JComboBox();
+		panel_4.add(comboBox_1);
+		
+		JComboBox comboBox_2 = new JComboBox();
+		panel_4.add(comboBox_2);
+		
+		JLabel lblNewLabel_6 = new JLabel("Nacionalidad");
+		panel_3.add(lblNewLabel_6);
+		
+		JPanel panel_5 = new JPanel();
+		panel_5.setBackground(new Color(255, 255, 255));
+		panel_3.add(panel_5);
+		panel_5.setSize(50,20);
+		panel_5.setLayout(new BorderLayout(0, 0));
+		
+		JComboBox comboBox_3 = new JComboBox();
+		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"México", "Perú", "Estados Unidos"}));
+		comboBox_3.setMaximumRowCount(0);
+		comboBox_3.setSize(20,10);
+		panel_5.add(comboBox_3, BorderLayout.NORTH);
+		
+		JLabel lblNewLabel_7 = new JLabel("Sexo");
+		panel_3.add(lblNewLabel_7,BorderLayout.NORTH);
+		
+		JPanel panel_6 = new JPanel();
+		panel_6.setOpaque(true);
+		panel_6.setBackground(new Color(201, 213, 191));
+		panel_3.add(panel_6);
+		panel_6.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("Masculino");
+		rdbtnNewRadioButton.setSelected(true);
+		rdbtnNewRadioButton.setBackground(new Color(255, 255, 255));
+		panel_6.add(rdbtnNewRadioButton);
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("Femenino");
+		rdbtnNewRadioButton_1.setBackground(new Color(255, 255, 255));
+		panel_6.add(rdbtnNewRadioButton_1);
+		
+		JButton btnNewButton = new JButton("Guardar");
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setOpaque(true);
+		btnNewButton.setSize(20,10);
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		btnNewButton.setBackground(new Color(44, 158, 61));
+		panel_3.add(btnNewButton,BorderLayout.NORTH);
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Login");				
+			}
+		});
+		
+		
+		return (JPanel) frame.getContentPane();
 	}
-	
+
 	public JPanel baja() {
-		JPanel mipanel = new JPanel(); // ESTE BLOQUE MODIFICA LO RELACIONADO CON EL PANEL DE LOGIN
-		mipanel.setBackground(Color.decode("0x415C95"));
-		mipanel.setOpaque(false);// si queremos ponerle un color, usamos esta funcion para habilitar el
-								// background
-		mipanel.setSize(800, 600);// comom panel es un objeto, tiene algunas caractetisticas como la ventana
-		mipanel.setLocation(0, 0);
-		mipanel.setLayout(null);
-		mipanel.revalidate();
-		mipanel.repaint();
+		JFrame frame = new JFrame();
+		frame.setBounds(100, 100, 800, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		JLabel head1=new JLabel("Baja de usuario");
-		head1.setOpaque(false);
-		head1.setBounds(400,100,200,40);
-		head1.setForeground(Color.white);
-		mipanel.add(head1);
-		return mipanel;
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
+		
+		JButton btnNewButton_1 = new JButton("Inicio");
+		btnNewButton_1.setBackground(new Color(255, 255, 128));
+		panel.add(btnNewButton_1);
+		
+		btnNewButton_1.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Login");				
+			}
+		});
+		
+		JLabel lblNewLabel = new JLabel("Baja de usuario");
+		panel.add(lblNewLabel);
+		
+		JPanel panel_1 = new JPanel();
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(null);
+		
+		JTextArea txtrIngresaElNmero = new JTextArea();
+		txtrIngresaElNmero.setEditable(false);
+		txtrIngresaElNmero.setOpaque(false);
+		txtrIngresaElNmero.setText("Ingresa el número de empleado \npara dar de baja");
+		txtrIngresaElNmero.setBounds(301, 172, 179, 58);
+		panel_1.add(txtrIngresaElNmero);
+		
+		JTextField textField = new JTextField();
+		textField.setBounds(301, 230, 179, 20);
+		panel_1.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Confirmar");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(196, 186, 9));
+		btnNewButton.setBounds(335, 261, 115, 23);
+		panel_1.add(btnNewButton);
+		
+		return (JPanel) frame.getContentPane();
 	}
-	
 
 	public JPanel login() {// aqui le agregamos un panel a nuestra ventana, y login es una funcion
 
@@ -599,21 +829,60 @@ public class Ventana extends JFrame {
 	}
 
 	public JPanel recuperar() {
-		JPanel mipanel = new JPanel();
-		mipanel.setLayout(null);
-		mipanel.setBounds(0, 0, 800, 600);
-		mipanel.setBackground(Color.black);
+		JFrame frame = new JFrame();
+		frame.setBounds(100, 100, 800, 600);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		JLabel head = new JLabel("Recuperar contraseña");
-		head.setBounds(400, 100, 200, 40);
-		head.setFont(new Font("Nunito", Font.BOLD, 16));
-		head.setBackground(Color.red);
-		head.setForeground(Color.white);
-		head.setOpaque(false);
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, BorderLayout.NORTH);
 
-		mipanel.add(head);
+		JButton btnNewButton_1 = new JButton("Inicio");
+		btnNewButton_1.setActionCommand("");
+		btnNewButton_1.setBackground(new Color(255, 255, 128));
+		panel.add(btnNewButton_1);
 
-		return mipanel;
+		btnNewButton_1.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Login");
+
+			}
+		});
+
+		JLabel lblNewLabel_1 = new JLabel("Recuperar contraseña");
+		panel.add(lblNewLabel_1);
+
+		JPanel panel_1 = new JPanel();
+		frame.getContentPane().add(panel_1, BorderLayout.CENTER);
+		panel_1.setLayout(null);
+
+		JTextField textField = new JTextField();
+		textField.setBounds(257, 258, 240, 20);
+		panel_1.add(textField);
+		textField.setColumns(10);
+
+		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel.setBounds(192, 71, 49, 14);
+		panel_1.add(lblNewLabel);
+
+		JTextArea txtrConfirmaTuDireccin = new JTextArea();
+		txtrConfirmaTuDireccin.setOpaque(false);
+		txtrConfirmaTuDireccin.setText(
+				"Confirma tu dirección de correo electrónico.\nEnviaremos un correo de confirmación, \npor favor escribe el código para \nverificar que eres tú");
+		txtrConfirmaTuDireccin.setBounds(257, 164, 240, 70);
+		panel_1.add(txtrConfirmaTuDireccin);
+
+		JButton btnNewButton = new JButton("Confirmar");
+		btnNewButton.setFont(new Font("Tahoma", Font.BOLD, 11));
+		btnNewButton.setForeground(new Color(255, 255, 255));
+		btnNewButton.setBackground(new Color(80, 173, 78));
+		btnNewButton.setBounds(320, 311, 117, 23);
+		panel_1.add(btnNewButton);
+
+		JButton boton = new JButton();
+
+		return (JPanel) frame.getContentPane();
 	}
 
 	public JPanel registro() {// aqui le agregamos un panel a nuestra ventana, y login es una funcion
@@ -874,7 +1143,7 @@ public class Ventana extends JFrame {
 			}
 		});
 
-		JButton ir_login = new JButton("Ir a registro");
+		JButton ir_login = new JButton("Login");
 		ir_login.setBackground(Color.decode("0x93CEEA"));
 		ir_login.setSize(200, 40);
 		ir_login.setLocation(700, 500);
@@ -963,6 +1232,17 @@ public class Ventana extends JFrame {
 		editar.setLayout(null);
 		editar.setVisible(true);
 		mipanel.add(editar);
+		JButton boton=new JButton("Inicio");
+		boton.setBounds(300,20,80,30);
+		boton.setBackground(Color.yellow);
+		mipanel.add(boton);
+		boton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				router("Login");
+			}
+		});
 		return mipanel;// aqui retornamos un panel que se va a mostrar en la ventana
 		// return users();
 
