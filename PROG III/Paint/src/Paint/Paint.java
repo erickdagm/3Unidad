@@ -21,6 +21,7 @@ public class Paint implements MouseListener, MouseMotionListener {
     private static final int CUADRADO = 2;
     private static final int TRIANGULO = 3;
     private static final int RECTANGULO = 4;
+    private static final int BORRADOR = 5; // Herramienta para borrar
     private int herramientaActual = PINCEL;
 
     private static final int TAMANO_CUADRADO = 100;
@@ -166,6 +167,14 @@ public class Paint implements MouseListener, MouseMotionListener {
         });
         panelPrincipal.add(btnColor12);
 
+        JButton btnBorrador = new JButton("Borrador");
+
+        btnBorrador.setBounds(10, 210, 130, 25);
+        btnBorrador.addActionListener(e -> {
+            herramientaActual = BORRADOR;
+        });
+        panelPrincipal.add(btnBorrador);
+
         deslizador = new JSlider(1, 20, tamanoPincel);
         deslizador.setBounds(10, 50, 300, 25);
         deslizador.addChangeListener(e -> tamanoPincel = deslizador.getValue());
@@ -182,19 +191,24 @@ public class Paint implements MouseListener, MouseMotionListener {
         panelPrincipal.add(btnTriangulo);
 
         JButton btnPincel = new JButton("Pincel");
+     
         btnPincel.setBounds(10, 170, 130, 25);
         btnPincel.addActionListener(e -> herramientaActual = PINCEL);
         panelPrincipal.add(btnPincel);
     }
+    
+   
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if (herramientaActual == PINCEL) {
-            trazoActual = new Trazo(tamanoPincel, colorPincel);
+        if (herramientaActual == PINCEL || herramientaActual == BORRADOR) {
+            Color colorActual = (herramientaActual == BORRADOR) ? panelDibujo.getBackground() : colorPincel;
+            trazoActual = new Trazo(tamanoPincel, colorActual);
             trazos.add(trazoActual);
             trazoActual.puntos.add(e.getPoint());
         }
     }
+
 
     @Override
     public void mouseReleased(MouseEvent e) {
@@ -206,11 +220,18 @@ public class Paint implements MouseListener, MouseMotionListener {
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        if (herramientaActual == PINCEL && trazoActual != null) {
-            trazoActual.puntos.add(e.getPoint());
-            panelDibujo.repaint();
+        if (herramientaActual == PINCEL || herramientaActual == BORRADOR) {
+            if (trazoActual != null) {
+                if (herramientaActual == BORRADOR) {
+                    trazoActual.color = panelDibujo.getBackground(); // Borra con el color del fondo
+                }
+                trazoActual.puntos.add(e.getPoint());
+                panelDibujo.repaint();
+            }
         }
     }
+
+    
 
     @Override
     public void mouseClicked(MouseEvent e) {
