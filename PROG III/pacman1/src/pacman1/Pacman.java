@@ -51,13 +51,17 @@ public class Pacman {
         private final int PACMAN_SIZE = 30;
         private final int MOVIMIENTO = 10;
         private ArrayList<Rectangle> paredes;
+        private int direccionX = 0;
+        private int direccionY = 0;
+        private Timer timer;
 
         public PanelJuego(ArrayList<Rectangle> paredes) {
             this.paredes = paredes;
             setBackground(Color.BLACK);
             setFocusable(true);
             addKeyListener(this);
-         // BORDES EXTERIORES
+
+            // BORDES EXTERIORES
             paredes.add(new Rectangle(0, 0, 435, 5));     // Arriba
             paredes.add(new Rectangle(0, 0, 5, 225));     // Izquierda
             paredes.add(new Rectangle(430, 0, 5, 225));   // Derecha
@@ -73,13 +77,7 @@ public class Pacman {
             paredes.add(new Rectangle(60, 85, 5, 60));
             paredes.add(new Rectangle(30, 145, 35, 5));
 
-           
-            paredes.add(new Rectangle(150, 30, 5, 160));
-            paredes.add(new Rectangle(150, 30, 60, 5));
-            paredes.add(new Rectangle(210, 30, 5, 60));
-            paredes.add(new Rectangle(180, 85, 35, 5));
-            paredes.add(new Rectangle(180, 85, 5, 60));
-            paredes.add(new Rectangle(150, 145, 35, 5));
+         
 
            
             paredes.add(new Rectangle(270, 30, 5, 160));
@@ -104,46 +102,17 @@ public class Pacman {
             paredes.add(new Rectangle(120, 100, 5, 20)); 
 
            
-            pacmanX = 65;  
-            pacmanY = 65; 
+            pacmanX = 200;  
+            pacmanY = 80; 
 
+            // Iniciar el Timer
+            timer = new Timer(100, e -> moverPacman());
+            timer.start();
         }
 
-        @Override
-        protected void paintComponent(Graphics g) {
-            super.paintComponent(g);
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setColor(Color.YELLOW);
-            g2d.fillArc(pacmanX, pacmanY, PACMAN_SIZE, PACMAN_SIZE, 45, 270);
-
-            g2d.setColor(Color.BLUE);
-            for (Rectangle pared : paredes) {
-                g2d.fill(pared);
-            }
-        }
-
-        public void resetearPacman() {
-            pacmanX = 200;
-            pacmanY = 130;
-            repaint();
-            requestFocusInWindow();
-        }
-
-        @Override
-        public void keyPressed(KeyEvent e) {
-            int key = e.getKeyCode();
-            int newX = pacmanX;
-            int newY = pacmanY;
-
-            if (key == KeyEvent.VK_W && pacmanY - MOVIMIENTO >= 0) {
-                newY -= MOVIMIENTO;
-            } else if (key == KeyEvent.VK_S && pacmanY + MOVIMIENTO + PACMAN_SIZE <= getHeight()) {
-                newY += MOVIMIENTO;
-            } else if (key == KeyEvent.VK_A && pacmanX - MOVIMIENTO >= 0) {
-                newX -= MOVIMIENTO;
-            } else if (key == KeyEvent.VK_D && pacmanX + MOVIMIENTO + PACMAN_SIZE <= getWidth()) {
-                newX += MOVIMIENTO;
-            }
+        private void moverPacman() {
+            int newX = pacmanX + direccionX * MOVIMIENTO;
+            int newY = pacmanY + direccionY * MOVIMIENTO;
 
             Rectangle futuro = new Rectangle(newX, newY, PACMAN_SIZE, PACMAN_SIZE);
             boolean hayColision = false;
@@ -163,7 +132,49 @@ public class Pacman {
             repaint();
         }
 
+        @Override
+        protected void paintComponent(Graphics g) {
+            super.paintComponent(g);
+            Graphics2D g2d = (Graphics2D) g;
+            g2d.setColor(Color.YELLOW);
+            g2d.fillArc(pacmanX, pacmanY, PACMAN_SIZE, PACMAN_SIZE, 45, 270);
+
+            g2d.setColor(Color.BLUE);
+            for (Rectangle pared : paredes) {
+                g2d.fill(pared);
+            }
+        }
+
+        public void resetearPacman() {
+            pacmanX = 200;
+            pacmanY = 130;
+            direccionX = 0;
+            direccionY = 0;
+            repaint();
+            requestFocusInWindow();
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+            int key = e.getKeyCode();
+
+            if (key == KeyEvent.VK_W) {
+                direccionX = 0;
+                direccionY = -1;
+            } else if (key == KeyEvent.VK_S) {
+                direccionX = 0;
+                direccionY = 1;
+            } else if (key == KeyEvent.VK_A) {
+                direccionX = -1;
+                direccionY = 0;
+            } else if (key == KeyEvent.VK_D) {
+                direccionX = 1;
+                direccionY = 0;
+            }
+        }
+
         @Override public void keyReleased(KeyEvent e) {}
         @Override public void keyTyped(KeyEvent e) {}
     }
+
 }
